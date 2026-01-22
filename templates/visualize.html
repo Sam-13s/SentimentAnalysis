@@ -94,13 +94,17 @@
                     width: 100%;
                     margin-top: 10px;
                 }
-                .footer {
-                    grid-template-columns: 1fr;
-                    gap: 15px;
+                .footer-content {
+                    flex-direction: column;
+                    align-items: center;
                     padding: 20px 10px;
                 }
-                .footer img, .footer p, .footer .social-links {
-                    justify-self: center;
+                .footer-section {
+                    margin: 15px 0;
+                    text-align: center;
+                }
+                .social-links {
+                    justify-content: center;
                 }
             }
             @media (max-width: 480px) {
@@ -123,11 +127,17 @@
                 .chart-container {
                     padding: 10px;
                 }
-                .footer {
-                    font-size: 14px;
+                .footer-content {
+                    padding: 15px 5px;
                 }
-                .footer img {
+                .footer-section h3 {
+                    font-size: 16px;
+                }
+                .footer-section.about img {
                     height: 40px;
+                }
+                .social-links a {
+                    font-size: 20px;
                 }
             }
             .summary {
@@ -165,33 +175,72 @@
             }
             .footer {
                 background: linear-gradient(135deg, #f0f2f5 0%, #e0e7ff 100%);
-                padding: 30px 20px;
                 color: #555;
-                font-size: 16px;
                 border-top: 2px solid #ddd;
-                display: grid;
-                grid-template-columns: 1fr auto 1fr;
-                align-items: center;
-                justify-items: center;
                 animation: fadeIn 1s ease-in-out;
             }
-            .footer img {
+            .footer-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 30px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+                flex-wrap: wrap;
+            }
+            .footer-section {
+                flex: 1;
+                margin: 0 20px;
+                min-width: 200px;
+            }
+            .footer-section.about img {
                 height: 60px;
-                justify-self: start;
+                margin-bottom: 10px;
             }
-            .footer p {
-                justify-self: center;
-            }
-            .footer .social-links {
-                justify-self: end;
-            }
-            .footer .social-links a {
+            .footer-section h3 {
                 color: #333;
-                margin: 0 15px;
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+            .footer-section ul {
+                list-style: none;
+                padding: 0;
+            }
+            .footer-section ul li {
+                margin-bottom: 8px;
+            }
+            .footer-section ul li a {
+                color: #667eea;
+                text-decoration: none;
                 transition: color 0.3s ease;
             }
-            .footer .social-links a:hover {
+            .footer-section ul li a:hover {
+                color: #5a6fd8;
+            }
+            .footer-section p {
+                margin: 5px 0;
+                font-size: 14px;
+            }
+            .social-links {
+                display: flex;
+                gap: 15px;
+            }
+            .social-links a {
+                color: #333;
+                font-size: 24px;
+                transition: color 0.3s ease;
+            }
+            .social-links a:hover {
                 color: #667eea;
+            }
+            .footer-bottom {
+                background: rgba(0,0,0,0.1);
+                padding: 15px 20px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .footer-bottom p {
+                margin: 0;
             }
             @keyframes fadeIn {
                 from { opacity: 0; transform: translateY(20px); }
@@ -260,14 +309,37 @@
             {% endif %}
             <p style="text-align: center;"><a href="/">Back to Analysis</a></p>
         </div>
-        <footer class="footer">
-            <img src="/static/logo.jpg" alt="Logo">
-            <p>&copy; 2026 Sentiment Analysis Web App | Powered by <a href="" target="_blank"> IDX∞ </a></p>
-            <div class="social-links">
-                <a href="https://github.com/Sam-13s" target="_blank"><i class="fab fa-github fa-lg"></i></a>
-                <a href="http://linkedin.com/in/samir13" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <img src="/static/logo.jpg" alt="Logo">
+                <p>Sentiment Analysis Web App - Analyze text sentiment with ease.</p>
             </div>
-        </footer>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/visualize">Visualization</a></li>
+                    <li><a href="/export">Export</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact</h3>
+                <p>Email: info@sentimentapp.com</p>
+                <p>Phone: +1 (123) 456-7890</p>
+            </div>
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Sam-13s" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="http://linkedin.com/in/samir13" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sentiment Analysis Web App | Powered by <a href="" target="_blank"> IDX∞ </a></p>
+        </div>
+    </footer>
         <script>
             {% if data_json != 'null' %}
             const data = JSON.parse('{{ data_json|safe }}');
