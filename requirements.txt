@@ -1,0 +1,10 @@
+flask
+textblob
+transformers
+torch
+requests
+nltk
+beautifulsoup4
+scikit-learn
+pandas
+openpyxl
